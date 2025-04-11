@@ -1,68 +1,160 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Портфолио</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .aspect-16-9 {
-      position: relative;
-      padding-top: 56.25%;
-    }
-    .aspect-16-9 > .content {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой сайт</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .title-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            margin-right: 20px;
+            margin-bottom: 0;
+        }
+        
+        .photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .about {
+            margin-bottom: 20px;
+        }
+        
+        .channels, .socials {
+            margin-bottom: 20px;
+        }
+        
+        .channels a, .socials a {
+            display: inline-block;
+            margin-right: 15px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .channels a:hover, .socials a:hover {
+            text-decoration: underline;
+        }
+        
+        .portfolio {
+            margin-top: 40px;
+        }
+        
+        .project {
+            margin-bottom: 40px;
+        }
+        
+        .project h2 {
+            margin-bottom: 10px;
+        }
+        
+        .project p {
+            margin-bottom: 15px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .gallery img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        @media (min-width: 600px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .gallery img:first-child {
+                grid-column: 1 / -1;
+            }
+        }
+        
+        @media (max-width: 599px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery img:first-child {
+                grid-column: 1 / -1;
+            }
+            
+            .title-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .photo {
+                margin-top: 10px;
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans">
-
-  <!-- Hero section -->
-  <section class="flex flex-col p-8 w-full mx-auto mt-12">
-    <div class="flex flex-row items-center gap-2"> <!-- gap-2 для маленького расстояния между текстом и изображением -->
-      <div class="text-left md:max-w-2xl">
-        <h1 class="text-6xl font-bold mb-6">Это я</h1>
-      </div>
-      <!-- Изображение -->
-      <img src="https://deepkins.github.io/portfolio/images/itsme.png" alt="Фото" class="max-w-[100px] max-h-[140px] object-contain ml-2" /> <!-- Добавлен ml-2 для отступа между текстом и фото -->
-    </div>
-    <div class="text-left md:max-w-2xl mt-6">
-      <p class="text-gray-700 mb-4 text-lg md:text-xl max-w-prose">
-        Фархад Загидуллин. Графический дизайнер, арт-директор. Начал карьеру в Институте ИТИС КФУ и в отделе развития бренда Казанского федерального университета. Сотрудничал с creeptone media, colibrity agency, брендинговым агентством Кит и Кот, ITD agency. Работаю в мэрии города Иннополис.
-      </p>
-
-      <!-- Social links -->
-      <div class="text-left md:max-w-2xl mb-2">
-        <div class="flex space-x-4 text-blue-600">
-          <a href="#" class="hover:underline">Instagram</a>
-          <a href="#" class="hover:underline">Telegram</a>
-          <a href="#" class="hover:underline">GitHub</a>
+<body>
+    <header>
+        <div class="title-container">
+            <h1>Это я</h1>
+            <img src="https://deepkins.github.io/portfolio/images/itsme.png" alt="Мое фото" class="photo">
         </div>
-        <p class="mt-4 text-gray-700">
-          Веду каналы: <a href="#" class="text-blue-600 hover:underline">бюджетный дизайнер</a>, <a href="#" class="text-blue-600 hover:underline">художник Равиль Загидуллин</a>
+        <p class="about">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.
         </p>
-      </div>
-
-      <!-- Tat Cult Fest -->
-      <h2 class="text-3xl font-semibold mb-2 mt-12">Tat Cult Fest</h2>
-      <p class="text-gray-600 mb-6 max-w-xl">
-        Незабываемое событие, объединяющее искусство, музыку и современную культуру. Здесь каждый найдет вдохновение и откроет для себя что-то новое.
-      </p>
-    </div>
-
-    <!-- Portfolio grid (плитка) -->
-    <div class="w-full px-4 md:px-8 md:pl-0">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="aspect-16-9 bg-gray-300 w-full"></div>
-        <div class="aspect-16-9 bg-gray-300 w-full"></div>
-        <div class="aspect-16-9 bg-gray-300 w-full"></div>
-        <div class="aspect-16-9 bg-gray-300 w-full"></div>
-      </div>
-    </div>
-
-  </section>
-
+        <div class="channels">
+            <p>Я веду каналы:</p>
+            <a href="#">Бюджетный дизайнер</a>
+            <a href="#">Художник Равиль Загидуллин</a>
+        </div>
+        <div class="socials">
+            <p>Соцсети:</p>
+            <a href="#">ВКонтакте</a>
+            <a href="#">Telegram</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+        </div>
+    </header>
+    
+    <section class="portfolio">
+        <div class="project">
+            <h2>Заголовок проекта</h2>
+            <p>Краткое описание проекта в две строки. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <div class="gallery">
+                <img src="project1-large.jpg" alt="Проект 1">
+                <img src="project1-1.jpg" alt="Проект 1 фото 1">
+                <img src="project1-2.jpg" alt="Проект 1 фото 2">
+                <img src="project1-3.jpg" alt="Проект 1 фото 3">
+                <img src="project1-4.jpg" alt="Проект 1 фото 4">
+                <img src="project1-5.jpg" alt="Проект 1 фото 5">
+                <img src="project1-6.jpg" alt="Проект 1 фото 6">
+            </div>
+        </div>
+    </section>
 </body>
 </html>
