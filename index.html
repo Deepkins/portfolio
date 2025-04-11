@@ -43,8 +43,16 @@
         }
         
         .about {
-            margin-bottom: 20px;
-            text-align: left; /* Обычное выравнивание по левому краю */
+            margin-bottom: 10px;
+        }
+        
+        .experience {
+            margin-bottom: 15px;
+        }
+        
+        .experience p {
+            margin-bottom: 5px;
+            font-weight: 500;
         }
         
         .work-info {
@@ -61,21 +69,20 @@
             font-weight: 600;
         }
         
-        .channels, .socials {
+        .channels, .socials, .experience-links {
             margin-bottom: 20px;
         }
         
-        .channels a, .socials a, .about a {
-            display: inline;
+        .channels a, .socials a, .experience-links a {
+            display: inline-block;
+            margin-right: 15px;
             color: #0066cc;
             text-decoration: none;
             font-weight: 500;
             position: relative;
-            white-space: normal; /* Разрешаем перенос длинных ссылок */
-            word-break: break-word; /* Разрешаем разрыв длинных слов */
         }
         
-        .channels a::after, .socials a::after, .about a::after {
+        .channels a::after, .socials a::after, .experience-links a::after {
             content: '';
             position: absolute;
             left: 0;
@@ -88,7 +95,7 @@
             transition: transform 0.3s ease;
         }
         
-        .channels a:hover::after, .socials a:hover::after, .about a:hover::after {
+        .channels a:hover::after, .socials a:hover::after, .experience-links a:hover::after {
             transform: scaleX(1);
             transform-origin: left;
         }
@@ -148,6 +155,11 @@
                 align-items: flex-start;
                 gap: 10px;
             }
+            
+            .experience-links a {
+                display: block;
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
@@ -157,10 +169,9 @@
             <h1>Это я</h1>
             <img src="https://deepkins.github.io/portfolio/images/itsme.png" alt="Мое фото" class="photo">
         </div>
-        <p class="about">
-            Фархад Загидуллин. Графический дизайнер, арт-директор. Начал карьеру <a href="#">в Институте ИТИС КФУ</a> и <a href="#">в отделе развития бренда Казанского федерального университета</a>. Сотрудничал с <a href="#">creeptone media</a>, <a href="#">colibrity agency</a>, <a href="#">брендинговым агентством Кит и Кот</a>, <a href="#">ITD agency</a>.
-        </p>
         
+        <p class="about">Фархад Загидуллин. Графический дизайнер, арт-директор.</p>
+
         <div class="work-info">
             <div>Работаю в мэрии города Иннополис</div>
             <div class="timer" id="workTimer">
@@ -171,11 +182,30 @@
             </div>
         </div>
         
+        <div class="experience">
+            <p>Работал здесь:</p>
+            <div class="experience-links">
+                <a href="#">Институт ИТИС КФУ</a>
+                <a href="#">Отдел развития бренда КФУ</a>
+            </div>
+        </div>
+        
+        <div class="experience">
+            <p>Сотрудничал с:</p>
+            <div class="experience-links">
+                <a href="#">creeptone media</a>
+                <a href="#">colibrity agency</a>
+                <a href="#">брендинговым агентством Кит и Кот</a>
+                <a href="#">ITD agency</a>
+            </div>
+        </div>
+        
         <div class="channels">
             <p>Я веду каналы:</p>
             <a href="#">Бюджетный дизайнер</a>
             <a href="#">Художник Равиль Загидуллин</a>
         </div>
+        
         <div class="socials">
             <p>Соцсети:</p>
             <a href="#">ВКонтакте</a>
