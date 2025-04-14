@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
     <style>
         * {
             box-sizing: border-box;
@@ -27,13 +28,14 @@
         .title-container {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             gap: 20px;
         }
         
         h1 {
             margin-bottom: 0;
             font-weight: 600;
+            font-size: 60px;
         }
         
         .photo {
@@ -43,11 +45,12 @@
         }
         
         .about {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .experience {
-            margin-bottom: 15px; /* Одинаковый отступ для всех блоков опыта */
+            margin-top: 30px;
+            margin-bottom: 30px;
         }
         
         .experience p {
@@ -56,7 +59,7 @@
         }
         
         .work-info {
-            margin-bottom: 15px;
+            margin-bottom: 30px;
             color: #444;
         }
         
@@ -69,35 +72,37 @@
             font-weight: 600;
         }
         
-        .channels, .socials, .experience-links {
-            margin-bottom: 20px;
+        .channels {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .socials {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .experience-links {
+            margin-bottom: 0;
         }
         
         .channels a, .socials a, .experience-links a {
             display: inline-block;
             margin-right: 15px;
             color: #0066cc;
-            text-decoration: none;
+            text-decoration: underline;
+            text-underline-offset: 3px;
             font-weight: 500;
             position: relative;
+            transition: opacity 0.3s ease;
         }
         
         .channels a::after, .socials a::after, .experience-links a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -1px;
-            width: 100%;
-            height: 1px;
-            background-color: #0066cc;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
+            display: none;
         }
         
-        .channels a:hover::after, .socials a:hover::after, .experience-links a:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
+        .channels a:hover, .socials a:hover, .experience-links a:hover {
+            opacity: 0.7;
         }
         
         .portfolio {
@@ -123,20 +128,44 @@
             gap: 15px;
         }
         
+        .gallery a {
+            display: block;
+            line-height: 0;
+            margin: 0;
+            position: relative;
+        }
+        
         .gallery img {
             width: 100%;
             height: auto;
             aspect-ratio: 16/9;
             object-fit: cover;
             border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 0;
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery a:hover .play-icon {
+            opacity: 0.9;
         }
         
         @media (min-width: 600px) {
             .gallery {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
             }
             
-            .gallery img:first-child {
+            .gallery a:first-child {
                 grid-column: 1 / -1;
             }
         }
@@ -144,21 +173,60 @@
         @media (max-width: 599px) {
             .gallery {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
             
-            .gallery img:first-child {
+            .gallery a:first-child {
                 grid-column: 1 / -1;
             }
             
             .title-container {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                margin-bottom: 20px;
+                gap: 1px;
             }
             
             .experience-links a {
                 display: block;
                 margin-bottom: 5px;
+            }
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 44px;
+            height: 44px;
+            background-color: #000000;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .scroll-to-top:hover {
+            background-color: #333333;
+            transform: translateY(-2px);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 599px) {
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
             }
         }
     </style>
@@ -170,8 +238,8 @@
             <img src="https://deepkins.github.io/portfolio/images/itsme.png" alt="Мое фото" class="photo">
         </div>
         
-        <p class="about">Фархад Загидуллин. Графический дизайнер, арт-директор.</p>
-
+        <p class="about">Фархад Загидуллин. Графический дизайнер, арт-директор. 36 лет. Живу в Иннополисе, скучаю по Казани.</p>
+        
         <div class="work-info">
             <div>Работаю в мэрии города Иннополис</div>
             <div class="timer" id="workTimer">
@@ -182,9 +250,9 @@
                 <span id="seconds">0 секунд</span>
             </div>
         </div>
-        
+
         <div class="experience">
-            <p>Работал здесь:</p>
+            <p>Раньше работал здесь:</p>
             <div class="experience-links">
                 <a href="#">Институт ИТИС КФУ</a>
                 <a href="#">Отдел развития бренда КФУ</a>
@@ -192,9 +260,10 @@
         </div>
         
         <div class="experience">
-            <p>Сотрудничал с:</p>
+            <p>И сотрудничал с:</p>
             <div class="experience-links">
                 <a href="#">creeptone media</a>
+                <a href="#">Школой 21</a>
                 <a href="#">colibrity agency</a>
                 <a href="#">брендинговым агентством Кит и Кот</a>
                 <a href="#">ITD agency</a>
@@ -202,7 +271,7 @@
         </div>
         
         <div class="channels">
-            <p>Я веду каналы:</p>
+            <p>Веду каналы:</p>
             <a href="#">Бюджетный дизайнер</a>
             <a href="#">Художник Равиль Загидуллин</a>
         </div>
@@ -221,13 +290,59 @@
             <h2>Заголовок проекта</h2>
             <p>Краткое описание проекта в две строки. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <div class="gallery">
-                <img src="project1-large.jpg" alt="Проект 1">
-                <img src="project1-1.jpg" alt="Проект 1 фото 1">
-                <img src="project1-2.jpg" alt="Проект 1 фото 2">
-                <img src="project1-3.jpg" alt="Проект 1 фото 3">
-                <img src="project1-4.jpg" alt="Проект 1 фото 4">
-                <img src="project1-5.jpg" alt="Проект 1 фото 5">
-                <img src="project1-6.jpg" alt="Проект 1 фото 6">
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery1">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 1">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery1">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 1 фото 1">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery1">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 1 фото 2">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery1">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 1 фото 3">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery1">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 1 фото 4">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery1">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 1 фото 5">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery1">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 1 фото 6">
+                </a>
+            </div>
+        </div>
+
+        <div class="project">
+            <h2>Заголовок проекта</h2>
+            <p>Краткое описание проекта в две строки. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <div class="gallery">
+                <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" data-fancybox="gallery2" data-type="video">
+                    <img src="Images/video-preview.jpg" alt="Видео проекта">
+                    <svg class="play-icon" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="32" cy="32" r="32" fill="white" fill-opacity="0.8"/>
+                        <path d="M42 32L26 42L26 22L42 32Z" fill="black"/>
+                    </svg>
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery2">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 2 фото 1">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery2">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 2 фото 2">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery2">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 2 фото 3">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery2">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 2 фото 4">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery2">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 2 фото 5">
+                </a>
+                <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery2">
+                    <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 2 фото 6">
+                </a>
             </div>
         </div>
     </section>
@@ -288,7 +403,7 @@
         function getRussianMinutes(number) {
             if (number % 100 >= 11 && number % 100 <= 14) return 'минут';
             switch (number % 10) {
-                case 1: return 'минута';
+                case 1: return 'минуту';
                 case 2:
                 case 3:
                 case 4: return 'минуты';
@@ -299,7 +414,7 @@
         function getRussianSeconds(number) {
             if (number % 100 >= 11 && number % 100 <= 14) return 'секунд';
             switch (number % 10) {
-                case 1: return 'секунда';
+                case 1: return 'секунду';
                 case 2:
                 case 3:
                 case 4: return 'секунды';
@@ -309,6 +424,63 @@
         
         updateTimer();
         setInterval(updateTimer, 1000);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            Toolbar: {
+                display: ["close"],
+                buttons: ["close"]
+            },
+            Thumbs: {
+                autoStart: true,
+                position: "bottom"
+            },
+            buttons: [],
+            options: {
+                zoom: false,
+                slideshow: false,
+                fullscreen: false,
+                download: false
+            },
+            l10n: {
+                CLOSE: "Закрыть",
+                NEXT: "Следующее",
+                PREV: "Предыдущее"
+            }
+        });
+    </script>
+
+    <!-- Добавляем кнопку наверх -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Наверх">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4L12 20M12 4L6 10M12 4L18 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <script>
+        // Добавляем скрипт для кнопки наверх после существующих скриптов
+        const scrollToTopButton = document.getElementById('scrollToTop');
+        
+        // Показываем кнопку после прокрутки на 400px
+        const toggleScrollButton = () => {
+            if (window.scrollY > 400) {
+                scrollToTopButton.classList.add('visible');
+            } else {
+                scrollToTopButton.classList.remove('visible');
+            }
+        };
+        
+        // Плавная прокрутка наверх
+        scrollToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Слушаем событие прокрутки
+        window.addEventListener('scroll', toggleScrollButton);
     </script>
 </body>
 </html>
