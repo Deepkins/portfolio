@@ -27,7 +27,7 @@
         
         .title-container {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 20px;
             gap: 20px;
         }
@@ -42,6 +42,29 @@
             height: 100px;
             width: auto;
             object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+        
+        .photo:hover {
+            animation: swing 2.2s linear infinite;
+        }
+        
+        @keyframes swing {
+            0% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(3deg);
+            }
+            50% {
+                transform: rotate(0deg);
+            }
+            75% {
+                transform: rotate(-3deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
         }
         
         .about {
@@ -227,6 +250,61 @@
             .scroll-to-top {
                 bottom: 20px;
                 right: 20px;
+            }
+        }
+
+        .info-block {
+            display: flex;
+            gap: 20px;
+        }
+
+        .metrics {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100px; /* Такая же высота как у фото */
+        }
+
+        .metric {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: 300px;
+        }
+
+        .metric-label {
+            min-width: 100px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .metric-bar {
+            flex-grow: 1;
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            height: 100%;
+            background: #000;
+            border-radius: 2px;
+            transition: width 1s ease;
+        }
+
+        @media (max-width: 599px) {
+            .info-block {
+                flex-direction: column;
+            }
+
+            .metrics {
+                height: auto;
+                gap: 15px;
+            }
+
+            .metric {
+                width: 100%;
             }
         }
     </style>
