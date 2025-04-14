@@ -214,9 +214,17 @@
                 gap: 1px;
             }
             
-            .experience-links a {
+            .experience-links a,
+            .channels a,
+            .socials a {
                 display: block;
-                margin-bottom: 5px;
+                margin-bottom: 8px; /* Унифицированный отступ для всех ссылок */
+            }
+
+            .experience-links a:last-child,
+            .channels a:last-child,
+            .socials a:last-child {
+                margin-bottom: 0; /* Убираем отступ у последней ссылки */
             }
         }
 
