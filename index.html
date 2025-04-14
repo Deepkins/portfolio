@@ -316,8 +316,7 @@
             position: relative;
             width: 100%;
             padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
-            grid-column: 1 / -1; /* Видео на всю ширину, как первое изображение */
-            display: block; /* Важно для правильного отображения */
+            grid-column: 1 / -1; /* Видео на всю ширину */
         }
 
         .video-container iframe {
@@ -417,7 +416,7 @@
             <h2>Заголовок проекта</h2>
             <p>Краткое описание проекта в две строки. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <div class="gallery">
-                <a href="https://vimeo.com/731387449" data-fancybox="gallery2" data-type="video" class="video-container">
+                <div class="video-container">
                     <iframe src="https://player.vimeo.com/video/731387449" 
                             width="100%" 
                             height="100%" 
@@ -425,7 +424,7 @@
                             allow="autoplay; fullscreen; picture-in-picture" 
                             allowfullscreen>
                     </iframe>
-                </a>
+                </div>
                 <a href="https://deepkins.github.io/portfolio/images/Image1.jpg" data-fancybox="gallery2">
                     <img src="https://deepkins.github.io/portfolio/images/Image1.jpg" alt="Проект 2 фото 1">
                 </a>
