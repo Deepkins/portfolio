@@ -43,16 +43,16 @@
         }
         
         .about {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
         .experience {
-            margin-bottom: 15px;
+            margin-bottom: 15px; /* Одинаковый отступ для всех блоков опыта */
         }
         
         .experience p {
             margin-bottom: 5px;
-            font-weight: 500;
+            font-weight: 400;
         }
         
         .work-info {
@@ -177,7 +177,8 @@
             <div class="timer" id="workTimer">
                 <span id="years">0 лет</span> 
                 <span id="days">0 дней</span> 
-                <span id="hours">0 часов</span> 
+                <span id="hours">0 часов</span>
+                <span id="minutes">0 минут</span>
                 <span id="seconds">0 секунд</span>
             </div>
         </div>
@@ -201,16 +202,17 @@
         </div>
         
         <div class="channels">
-            <p>Веду каналы:</p>
+            <p>Я веду каналы:</p>
             <a href="#">Бюджетный дизайнер</a>
             <a href="#">Художник Равиль Загидуллин</a>
         </div>
         
         <div class="socials">
-            <p>Написать мне:</p>
-            <a href="#">На почту</a>
-            <a href="#">В телеграм</a>
-            <a href="#">Сюда не нужно</a>
+            <p>Соцсети:</p>
+            <a href="#">ВКонтакте</a>
+            <a href="#">Telegram</a>
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
         </div>
     </header>
     
@@ -238,6 +240,7 @@
             const diff = now - startDate;
             
             const seconds = Math.floor(diff / 1000) % 60;
+            const minutes = Math.floor(diff / (1000 * 60)) % 60;
             const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
             const days = Math.floor(diff / (1000 * 60 * 60 * 24)) % 365;
             const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
@@ -245,6 +248,7 @@
             document.getElementById('years').textContent = `${years} ${getRussianYears(years)}`;
             document.getElementById('days').textContent = `${days} ${getRussianDays(days)}`;
             document.getElementById('hours').textContent = `${hours} ${getRussianHours(hours)}`;
+            document.getElementById('minutes').textContent = `${minutes} ${getRussianMinutes(minutes)}`;
             document.getElementById('seconds').textContent = `${seconds} ${getRussianSeconds(seconds)}`;
         }
         
@@ -278,6 +282,17 @@
                 case 3:
                 case 4: return 'часа';
                 default: return 'часов';
+            }
+        }
+        
+        function getRussianMinutes(number) {
+            if (number % 100 >= 11 && number % 100 <= 14) return 'минут';
+            switch (number % 10) {
+                case 1: return 'минута';
+                case 2:
+                case 3:
+                case 4: return 'минуты';
+                default: return 'минут';
             }
         }
         
